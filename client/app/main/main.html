@@ -1,3 +1,21 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
 
-<code>{{candidato | json}}</code>
+<div class="container-fluid">
+      <div class="row">
+          <div class="col-md-5">
+              <div id="CandidatoA">
+                  <img src="{{dilma.foto}}" alt="" title="Clique para votar a favor de {{dilma.apelido}}" />
+                  <h4>{{dilma.apelido}} - {{dimal.cargo}} / {{dilma.partido}}</h4>
+              </div>
+          </div>
+          <div class="col-md-2">
+              <span class="glyphicon glyphicon-remove x"></span>
+          </div>
+          <div class="col-md-5">
+              <div id="CandidatoB">
+                  <img src="{{candidato.foto}}" alt="" title="Clique para votar a favor de {{candidato.apelido}}" />
+                  <h4>{{candidato.apelido}} - {{candidato.cargo}} / {{candidato.partido}}</h4>
+              </div>
+          </div>
+      </div>
+</div>

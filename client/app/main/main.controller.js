@@ -2,6 +2,8 @@
 
 angular.module('mscApp')
   .controller('MainCtrl', function ($scope, $http) {
+    $scope.loading = false;
+
     $scope.config = {
       token: "Or6smnHiEKHp",
       estado: "",
@@ -64,6 +66,7 @@ angular.module('mscApp')
 
 
     function reqR () {
+      $scope.loading = true;
       $scope.config.partido = $scope.partidos[randomize($scope.partidos)]["partido"];
       $scope.config.estado = $scope.estados[randomize($scope.estados)]["estado"];
 
@@ -81,6 +84,7 @@ angular.module('mscApp')
         }else{
           $scope.candidato = data[randomize(data)];
         }
+        $scope.loading = false;
       });
     }
 
@@ -91,7 +95,21 @@ angular.module('mscApp')
       return Math.floor(Math.random() * toRandomize);
     }
 
-    $scope.deleteThing = function(thing) {
-      $http.delete('/api/things/' + thing._id);
+    $scope.vote = function($event, id) {
+      $scope.loading = true;
+      var reqVoto = {
+        method: "POST",
+        url: "api/votos",
+        data: {
+          "id_votado": id
+        }
+      };
+
+
+      $http(reqVoto).success(function(){
+        reqR();
+      });
+
+      $event.preventDefault();
     };
   });
